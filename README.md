@@ -12,7 +12,6 @@
 [![Sourcegraph](https://sourcegraph.com/github.com/Depado/bfchroma/-/badge.svg)](https://sourcegraph.com/github.com/Depado/bfchroma?badge)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/Depado)
 
-
 Integrating [Chroma](https://github.com/alecthomas/chroma) syntax highlighter as
 a [Blackfriday](https://github.com/russross/blackfriday) renderer.
 
@@ -23,15 +22,11 @@ This project requires and uses the `v2` version of
 [this issue](https://github.com/Depado/bfchroma/issues/3) I decided to rollback
 to the `gopkg.in` version so the lib can be go gettable. 
 
-```
-$ go get -u github.com/Depado/bfchroma
-```
+    $ go get -u github.com/Depado/bfchroma
 
 You can also install it directly by using dep in your project:
 
-```
-$ dep ensure -add github.com/Depado/bfchroma
-```
+    $ dep ensure -add github.com/Depado/bfchroma
 
 _Additionnaly, this project uses the module approach of go 1.11_ 
 
@@ -55,22 +50,22 @@ html := bf.Run([]byte(md), bf.WithRenderer(bfchroma.NewRenderer()))
 ### Options
 
 - `Style(s string)`  
-Define the style used by chroma for the rendering. The full list can be found [here](https://github.com/alecthomas/chroma/tree/master/styles)
+  Define the style used by chroma for the rendering. The full list can be found [here](https://github.com/alecthomas/chroma/tree/master/styles)
 - `ChromaStyle(*chroma.Style)`  
-This option can be used to passe directly a `*chroma.Style` instead of the 
-string representing the style as with the `Style(string)` option. 
+  This option can be used to passe directly a `*chroma.Style` instead of the 
+  string representing the style as with the `Style(string)` option. 
 - `WithoutAutodetect()`  
-By default when no language information is written in the code block, this 
-renderer will try to auto-detect the used language. This option disables
-this behavior and will fallback to a sane default when no language
-information is available.
+  By default when no language information is written in the code block, this 
+  renderer will try to auto-detect the used language. This option disables
+  this behavior and will fallback to a sane default when no language
+  information is available.
 - `Extend(bf.Renderer)`  
-This option allows to define the base blackfriday that will be extended.
+  This option allows to define the base blackfriday that will be extended.
 - `ChromaOptions(...html.Option)`  
-This option allows you to pass Chroma's html options in the renderer. Such
-options can be found [here](https://github.com/alecthomas/chroma#the-html-formatter).
-There is currently an issue with the `html.WithClasses()` option as it expects
-the CSS classes to be written separately. I'll come up with a fix later.
+  This option allows you to pass Chroma's html options in the renderer. Such
+  options can be found [here](https://github.com/alecthomas/chroma#the-html-formatter).
+  There is currently an issue with the `html.WithClasses()` option as it expects
+  the CSS classes to be written separately. I'll come up with a fix later.
 
 ### Option examples
 
@@ -103,29 +98,28 @@ r = bfchroma.NewRenderer(bfchroma.ChromaStyle(styles.Dracula))
 
 ## Examples
 
-```go
-package main
+````go
+    package main
 
-import (
-	"fmt"
+    import (
+    	"fmt"
 
-	"github.com/Depado/bfchroma"
+    	"github.com/Depado/bfchroma"
 
-	bf "gopkg.in/russross/blackfriday.v2"
-)
+    	bf "github.com/russross/blackfriday/v2"
+    )
 
-var md = "This is some sample code.\n\n```go\n" +
-	`func main() {
-	fmt.Println("Hi")
-}
-` + "```"
+    var md = "This is some sample code.\n\n```go\n" +
+    	`func main() {
+    	fmt.Println("Hi")
+    }
+    ` + "```"
 
-func main() {
-	html := bf.Run([]byte(md), bf.WithRenderer(bfchroma.NewRenderer()))
-	fmt.Println(string(html))
-}
-```
-
+    func main() {
+    	html := bf.Run([]byte(md), bf.WithRenderer(bfchroma.NewRenderer()))
+    	fmt.Println(string(html))
+    }
+````
 
 Will output :
 
